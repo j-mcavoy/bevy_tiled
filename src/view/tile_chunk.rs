@@ -1,3 +1,4 @@
+use bevy::prelude::*;
 use bevy::{
     math::{Vec2, Vec4},
     render::{
@@ -10,13 +11,13 @@ use bevy::{
 use tiled::{LayerTile, Tileset};
 
 use crate::{loader::TiledMapLoader, Map, TileMapChunk, TILE_MAP_PIPELINE_HANDLE};
-use bevy::prelude::*;
 
 #[derive(Debug)]
 pub struct LayerChunk {
     pub position: Vec2,
     pub tiles: Vec<Vec<TileChunk>>,
 }
+
 impl LayerChunk {
     pub fn build_uv_mesh(&self, tileset_guid: u32) -> Option<Mesh> {
         let mut positions: Vec<[f32; 3]> = Vec::new();
@@ -97,7 +98,7 @@ impl Default for ChunkBundle {
     fn default() -> Self {
         Self {
             map_parent: Handle::default(),
-            chunk: TileMapChunk::default(),
+            chunk: TileMapChunk,
             visible: Visible {
                 is_transparent: true,
                 ..Default::default()
